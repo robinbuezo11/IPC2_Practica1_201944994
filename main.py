@@ -1,6 +1,4 @@
-from ast import Or
 from colorama import Fore
-
 from Cliente import Cliente
 from ColaOrdenes import ColaOrdenes
 from ListaShucos import ListaShucos
@@ -18,10 +16,11 @@ def main():
         print(Fore.BLUE + '\n--------------------MENU-------------------')
         print(Fore.BLUE + '1) Tomar la orden')
         print(Fore.BLUE + '2) Entregar orden')
+        print(Fore.BLUE + '8) Datos del desarrollador')
         print(Fore.BLUE + '9) Salir\n')
 
         try:
-            option = input(Fore.YELLOW + 'Ingrese el número de la opción que desee ')
+            option = int(input(Fore.YELLOW + 'Ingrese el número de la opción que desee '))
         except Exception as e:
             print(Fore.RED + f'{e}')
 
@@ -41,7 +40,7 @@ def main():
                     print(Fore.BLUE + '5) Costilla')
                     print(Fore.BLUE + '9) Confirmar Orden\n')
 
-                    option1 = input(Fore.YELLOW + 'Ingrese el número de la opción que desee ')
+                    option1 = int(input(Fore.YELLOW + 'Ingrese el número de la opción que desee '))
 
                     if option1==1:
                         cantidad=input(Fore.YELLOW + 'Ingrese la cantidad de sus shucos de Salchicha: ')
@@ -60,10 +59,21 @@ def main():
                         shucos.insertar(shuco=ShucoCostilla(int(cantidad)))
                     
                 ordenes.encolar(orden=Orden(cliente=cliente,shucos=shucos))
-                print(Fore.GREEN + '\nOrden ingresada correctamente')
+                print(Fore.GREEN + '\nOrden ingresada correctamente\n')
+                print(f'{ordenes.toString()}')
+                ordenes.graficar()
 
             except Exception as e:
                 print(Fore.RED + f'{e}')
         
         if option==2:
-            print(Fore.GREEN + f'\nOrden entregada: {ordenes.desencolar()}')
+            desencolada=ordenes.desencolar()
+            if desencolada:
+                print(Fore.GREEN + f'\nOrden entregada correctamente \nCliente: {desencolada.getOrden().getCliente().getNombre()}\nOrden: {desencolada.getOrden().getShucos().toString()}')
+            print(Fore.YELLOW + f'{ordenes.toString()}')
+            ordenes.graficar()
+
+        if option==8:
+            print(Fore.GREEN + '\nDesarrollaror: Robin Omar Buezo Díaz\nCarné: 201944994\nCurso: IPC2\n')
+
+main()
