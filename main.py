@@ -20,7 +20,11 @@ def main():
         print(Fore.BLUE + '9) Salir\n')
 
         try:
-            option = int(input(Fore.YELLOW + 'Ingrese el número de la opción que desee '))
+            seleccion=input(Fore.YELLOW + 'Ingrese el número de la opción que desee ')
+            if seleccion == '':
+                option = 0
+            else:
+                option = int(seleccion)
         except Exception as e:
             print(Fore.RED + f'{e}')
 
@@ -40,7 +44,11 @@ def main():
                     print(Fore.BLUE + '5) Costilla')
                     print(Fore.BLUE + '9) Confirmar Orden\n')
 
-                    option1 = int(input(Fore.YELLOW + 'Ingrese el número de la opción que desee '))
+                    seleccion1 = input(Fore.YELLOW + 'Ingrese el número del Shuco que desee ')
+                    if seleccion1 == '':
+                        option1 = 0
+                    else:
+                        option1 = int(seleccion1)
 
                     if option1==1:
                         cantidad=input(Fore.YELLOW + 'Ingrese la cantidad de sus shucos de Salchicha: ')
@@ -58,10 +66,13 @@ def main():
                         cantidad=input(Fore.YELLOW + 'Ingrese la cantidad de sus shucos de Costilla: ')
                         shucos.insertar(shuco=ShucoCostilla(int(cantidad)))
                     
-                ordenes.encolar(orden=Orden(cliente=cliente,shucos=shucos))
-                print(Fore.GREEN + '\nOrden ingresada correctamente\n')
-                print(f'{ordenes.toString()}')
-                ordenes.graficar()
+                if shucos.getTiempo()==0:
+                    print(Fore.RED + '\nNo seleccionó ningún shuco\n')
+                else:
+                    ordenes.encolar(orden=Orden(cliente=cliente,shucos=shucos))
+                    print(Fore.GREEN + '\nOrden ingresada correctamente\n')
+                    print(f'{ordenes.toString()}')
+                    ordenes.graficar()
 
             except Exception as e:
                 print(Fore.RED + f'{e}')
@@ -69,7 +80,7 @@ def main():
         if option==2:
             desencolada=ordenes.desencolar()
             if desencolada:
-                print(Fore.GREEN + f'\nOrden entregada correctamente \nCliente: {desencolada.getOrden().getCliente().getNombre()}\nOrden: {desencolada.getOrden().getShucos().toString()}')
+                print(Fore.GREEN + f'\nOrden entregada correctamente \nCliente: {desencolada.getOrden().getCliente().getNombre()}\nOrden:\n{desencolada.getOrden().getShucos().toString()}')
             print(Fore.YELLOW + f'{ordenes.toString()}')
             ordenes.graficar()
 

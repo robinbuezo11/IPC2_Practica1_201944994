@@ -54,7 +54,7 @@ class ColaOrdenes:
         return string
 
     def graficar(self):
-        text = 'digraph {node[shape=plain style=filled pencolor="#00000" color="#3ADEFF" fontname="Helvetica,Arial,sans-serif"] '
+        text = 'digraph {node[shape=plain style=filled pencolor="#00000" color="#3ADEFF" fontname="Helvetica,Arial,sans-serif"]edge[dir=back] '
         direccion = ''
         contador=self.__contadorordenes-self.__ordenesactuales
 
