@@ -6,6 +6,7 @@ class Orden:
         self.__cliente=cliente
         self.__shucos=shucos
         self.__tiempo=shucos.getTiempo()
+        self.__tiempocola=0
 
 
     def getCliente(self):
@@ -16,3 +17,9 @@ class Orden:
 
     def getTiempo(self):
         return self.__tiempo
+
+    def getTiempoCola(self):
+        return self.__tiempocola
+
+    def setTiempoCola(self,tiempocola):
+        self.__tiempocola = tiempocola

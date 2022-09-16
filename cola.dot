@@ -1,1 +1,1 @@
-digraph {node[shape=plain style=filled pencolor="#00000" color="#3ADEFF" fontname="Helvetica,Arial,sans-serif"]edge[dir=back] Orden8[label=<<table cellspacing="0" cellpadding="20"><tr><td><b>Cola vacia</b></td></tr></table>>]}
+digraph {node[shape=plain style=filled pencolor="#00000" color="#3ADEFF" fontname="Helvetica,Arial,sans-serif"]edge[dir=back] Orden5[label=<<table cellspacing="0" cellpadding="20"><tr><td><b>Orden 5</b></td></tr><tr><td>Juan<br/>1 Shuchos de Salchicha<br/>Tiempo: 2<br/>Tiempo en Cola: 0</td></tr></table>>]Orden5}

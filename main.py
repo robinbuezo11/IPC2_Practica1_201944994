@@ -20,13 +20,10 @@ def main():
         print(Fore.BLUE + '9) Salir\n')
 
         try:
-            seleccion=input(Fore.YELLOW + 'Ingrese el número de la opción que desee ')
-            if seleccion == '':
-                option = 0
-            else:
-                option = int(seleccion)
+            option = int(input(Fore.YELLOW + 'Ingrese el número de la opción que desee '))
         except Exception as e:
             print(Fore.RED + f'{e}')
+            option = 0
 
         if option==1:
             try:
@@ -43,12 +40,12 @@ def main():
                     print(Fore.BLUE + '4) Longaniza')
                     print(Fore.BLUE + '5) Costilla')
                     print(Fore.BLUE + '9) Confirmar Orden\n')
-
-                    seleccion1 = input(Fore.YELLOW + 'Ingrese el número del Shuco que desee ')
-                    if seleccion1 == '':
-                        option1 = 0
-                    else:
-                        option1 = int(seleccion1)
+                    
+                    try:
+                        option1 = int(input(Fore.YELLOW + 'Ingrese el número del Shuco que desee '))
+                    except Exception as e:
+                        print(Fore.RED + f'{e}')
+                        option = 0
 
                     if option1==1:
                         cantidad=input(Fore.YELLOW + 'Ingrese la cantidad de sus shucos de Salchicha: ')
@@ -80,7 +77,7 @@ def main():
         if option==2:
             desencolada=ordenes.desencolar()
             if desencolada:
-                print(Fore.GREEN + f'\nOrden entregada correctamente \nCliente: {desencolada.getOrden().getCliente().getNombre()}\nOrden:\n{desencolada.getOrden().getShucos().toString()}')
+                print(Fore.GREEN + f'\nOrden entregada correctamente \nCliente: {desencolada.getOrden().getCliente().getNombre()}\nOrden:\n{desencolada.getOrden().getShucos().toString()}Tiempo Total: {desencolada.getOrden().getTiempo()+desencolada.getOrden().getTiempoCola()}\n')
             print(Fore.YELLOW + f'{ordenes.toString()}')
             ordenes.graficar()
 

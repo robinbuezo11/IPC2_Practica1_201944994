@@ -1,6 +1,7 @@
 import os
 from colorama import Fore
 from NodoOrden import NodoOrden
+from Orden import Orden
 
 class ColaOrdenes:
     def __init__(self, primero=NodoOrden()) -> None:
@@ -8,18 +9,22 @@ class ColaOrdenes:
         self.__contadorordenes=1
         self.__ordenesactuales=0
 
-    def encolar(self, orden):
+    def encolar(self, orden=Orden()):
+        nuevaorden=orden
+
         if self.__primero.getOrden().getCliente().getNombre() == None:
-            self.__primero=NodoOrden(orden=orden)
+            self.__primero=NodoOrden(orden=nuevaorden)
             self.__contadorordenes+=1
             self.__ordenesactuales+=1
             return
         
         nodoaux=self.__primero
         while nodoaux.getSiguiente():
+            nuevaorden.setTiempoCola(nuevaorden.getTiempoCola()+nodoaux.getOrden().getTiempo())
             nodoaux=nodoaux.getSiguiente()
+        nuevaorden.setTiempoCola(nuevaorden.getTiempoCola()+nodoaux.getOrden().getTiempo())
         
-        nodoaux.setSiguiente(NodoOrden(orden=orden)) 
+        nodoaux.setSiguiente(NodoOrden(orden=nuevaorden)) 
         self.__contadorordenes+=1
         self.__ordenesactuales+=1  
 
@@ -46,7 +51,7 @@ class ColaOrdenes:
         nodoaux=self.__primero
         contador=self.__contadorordenes-self.__ordenesactuales
         while nodoaux:
-            orden=Fore.WHITE + f'\nOrden No. {contador}\n{nodoaux.getOrden().getCliente().getNombre()}\n{nodoaux.getOrden().getShucos().toStringWhithColor()}Tiempo: {nodoaux.getOrden().getTiempo()} min\n'
+            orden=Fore.WHITE + f'\nOrden No. {contador}\n{nodoaux.getOrden().getCliente().getNombre()}\n{nodoaux.getOrden().getShucos().toStringWhithColor()}Tiempo: {nodoaux.getOrden().getTiempo()} min\nTiempo en Cola: {nodoaux.getOrden().getTiempoCola()}\n'
             string += orden
             nodoaux=nodoaux.getSiguiente()
             contador+=1
@@ -67,14 +72,14 @@ class ColaOrdenes:
                 if nodoaux.getSiguiente():
                     shucos=nodoaux.getOrden().getShucos().toString().replace("\n","<br/>")
                     text += f'Orden{contador}[label=<<table cellspacing="0" cellpadding="20"><tr><td><b>Orden {contador}</b></td></tr>'
-                    text += f'<tr><td>{nodoaux.getOrden().getCliente().getNombre()}<br/>{shucos}Tiempo: {nodoaux.getOrden().getTiempo()}</td></tr></table>>]'
+                    text += f'<tr><td>{nodoaux.getOrden().getCliente().getNombre()}<br/>{shucos}Tiempo: {nodoaux.getOrden().getTiempo()}<br/>Tiempo en Cola: {nodoaux.getOrden().getTiempoCola()}</td></tr></table>>]'
                     direccion += f'Orden{contador}->'
                     nodoaux=nodoaux.getSiguiente()
                     contador+=1
                 else:
                     shucos=nodoaux.getOrden().getShucos().toString().replace("\n","<br/>")
                     text += f'Orden{contador}[label=<<table cellspacing="0" cellpadding="20"><tr><td><b>Orden {contador}</b></td></tr>'
-                    text += f'<tr><td>{nodoaux.getOrden().getCliente().getNombre()}<br/>{shucos}Tiempo: {nodoaux.getOrden().getTiempo()}</td></tr></table>>]'
+                    text += f'<tr><td>{nodoaux.getOrden().getCliente().getNombre()}<br/>{shucos}Tiempo: {nodoaux.getOrden().getTiempo()}<br/>Tiempo en Cola: {nodoaux.getOrden().getTiempoCola()}</td></tr></table>>]'
                     direccion += f'Orden{contador}'
                     nodoaux=nodoaux.getSiguiente()
                     contador+=1
